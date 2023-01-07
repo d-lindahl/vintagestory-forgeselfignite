@@ -4,7 +4,8 @@
     "name": "ForgeSelfIgnite",
     "authors": ["Quaan"],
     "description": "Small patch to make the forge self-ignite if new fuel is added and the content is still warm enough",
-    "version": "0.1.0",
+    "version": "0.2.0",
+    "side":  "Server",
     "dependencies": {
         "game": "1.17.9",
         "survival": "1.17.9"

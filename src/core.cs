@@ -68,11 +68,13 @@ namespace forgeselfignite
         [HarmonyPatch("OnCommonTick", new Type[] { typeof(float) })]
         public static void SelfIgniteIfFueldAndHot(BlockEntityForge __instance, float dt)
         {
-            if (__instance.Contents != null && __instance.CanIgnite && __instance.Contents.Collectible.GetTemperature(__instance.Api.World, __instance.Contents) > ForgeSelfIgniteConfig.Current.forgeSelfIgniteTemperature)
+            if (__instance.Api.Side == EnumAppSide.Server)
             {
-                __instance.GetType().GetMethod("TryIgnite", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(__instance, null);
+                if (__instance.Contents != null && __instance.CanIgnite && __instance.Contents.Collectible.GetTemperature(__instance.Api.World, __instance.Contents) > ForgeSelfIgniteConfig.Current.forgeSelfIgniteTemperature)
+                {
+                    __instance.GetType().GetMethod("TryIgnite", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(__instance, null);
+                }
             }
-
         }
     }
 }
